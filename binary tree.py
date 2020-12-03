@@ -38,6 +38,17 @@ class BinaryTree:
         self.__print(node.left)
         self.__print(node.right)
 
+    def print_breadth(self):
+        to_print = list()
+        to_print.append(self.root)
+        while to_print:
+            temp = to_print.pop(0)
+            if temp.left is not None:
+                to_print.append(temp.left)
+            if temp.right is not None:
+                to_print.append(temp.right)
+            print(temp.value)
+
     def contains(self, item):
         temp = self.root
         while temp:
@@ -61,3 +72,4 @@ print(tree.size())
 tree.print_values()
 print()
 print(tree.contains(3))
+tree.print_breadth()
