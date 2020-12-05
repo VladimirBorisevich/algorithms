@@ -11,6 +11,22 @@ class BinaryTree:
         self.root = None
         self.counter = 0
 
+    def __iter__(self):
+        self.to_print = []
+        self.to_print.append(self.root)
+        return self
+
+    def __next__(self):
+        if self.to_print:
+            temp = self.to_print.pop(0)
+            if temp.left is not None:
+                self.to_print.append(temp.left)
+            if temp.right is not None:
+                self.to_print.append(temp.right)
+            return temp.value
+        else:
+            raise StopIteration
+
     def push(self, item):
         self.root = self.__push(self.root, item)
         self.counter += 1
@@ -73,3 +89,8 @@ tree.print_values()
 print()
 print(tree.contains(3))
 tree.print_breadth()
+print('try BST iter method')
+for i, val in enumerate(tree):
+    if i == 2:
+        break
+    print(f'element number: {i}, his value is: {val}')
